@@ -11,14 +11,16 @@ Example:
 ::
 
   .. translation-assistant:: /src/chapter-01.txt
+    :no-title:
 
 Available options:
 
-no_title
+no-title
   Flag indicating that the first line of the file is not a title.
 
-  Please note that if the first line is title,
-  the next line won't be read as content.
+  Please note that this option will skip 2 first line of the file.
+
+  Line starting with ``$`` sign in not counted.
 
 
 Changes
