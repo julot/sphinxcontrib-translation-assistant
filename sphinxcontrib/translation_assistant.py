@@ -63,10 +63,9 @@ class Directive(BaseDirective):
 
         if not no_title:
             line = lines.popleft()
-            title = ' - '.join([line[0], line[1]])
-
-            section = nodes.section(ids=[title])
-            section.append(nodes.title(text=title))
+            section = nodes.section(ids=[line[0]])
+            section.append(nodes.title(text=line[1]))
+            section.append(nodes.title(text=line[0]))
             lines.popleft()
 
         contents = []
