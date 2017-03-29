@@ -1,3 +1,4 @@
+from collections import deque
 from itertools import zip_longest
 from docutils import nodes
 from docutils.parsers.rst import directives
@@ -23,7 +24,7 @@ def split(text):
 
 
 def merge(raws, translations):
-    data = []
+    data = deque()
 
     for raw, translation in zip_longest(raws, translations, fillvalue=''):
         prefix = raw[0]
@@ -43,14 +44,15 @@ class Directive(BaseDirective):
     final_argument_whitespace = True
     has_content = False
 
+    option_spec = {'no_title': directives.flag}
+
     def run(self):
         env = self.state.document.settings.env
 
         rel_path, path = env.relfn2path(directives.path(self.arguments[0]))
         env.note_dependency(rel_path)
 
-        print(rel_path)
-        print(path)
+        no_title = 'no_title' in self.options
 
         with open(path, encoding='utf-8') as f:
             text = f.read()
@@ -58,6 +60,19 @@ class Directive(BaseDirective):
         lines = parse(text=text)
 
         data = []
+
+        if not no_title:
+            line = lines.popleft()
+
+            container = nodes.container(classes=['raw'])
+            container.append(nodes.generated(text=line[0]))
+            data.append(container)
+
+            title = line[1] or line[0]
+            section = nodes.section(ids=[title])
+            section += nodes.title(text=title)
+            data.append(section)
+            lines.popleft()
 
         for line in lines:
             container = nodes.container(classes=['raw'])
