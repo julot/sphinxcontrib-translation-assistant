@@ -63,22 +63,23 @@ class Directive(BaseDirective):
 
         if not no_title:
             line = lines.popleft()
-            section = nodes.section(ids=[line[0]])
-            section.append(nodes.title(text=line[1]))
-            section.append(nodes.title(text=line[0]))
+            title = '{0} ー {1}'.format(line[0], line[1])
+            section = nodes.section(ids=title)
+            section.append(nodes.title(text=title))
             lines.popleft()
 
         contents = []
 
         for line in lines:
-            container = nodes.container(classes=['raw'])
-            container.append(nodes.generated(text=line[0] or '　'))
-            contents.append(container)
+            paragraph = nodes.paragraph(classes=['raw'], text=line[0] or '　')
+            contents.append(paragraph)
 
             if line[1]:
-                container = nodes.container(classes=['translated'])
-                container.append(nodes.generated(text=line[1]))
-                contents.append(container)
+                paragraph = nodes.paragraph(
+                    classes=['translated'],
+                    text=line[1],
+                )
+                contents.append(paragraph)
 
         if not no_title:
             section.extend(contents)
