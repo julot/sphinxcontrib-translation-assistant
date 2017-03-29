@@ -74,7 +74,7 @@ class Directive(BaseDirective):
             paragraph = nodes.paragraph(classes=['raw'], text=line[0] or '　')
             contents.append(paragraph)
 
-            if line[1]:
+            if line[1].strip():
                 paragraph = nodes.paragraph(
                     classes=['translated'],
                     text=line[1],
