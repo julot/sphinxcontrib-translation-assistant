@@ -12,6 +12,7 @@ Example:
 
   .. translation-assistant:: /src/chapter-01.txt
     :no-title:
+    :no-raw:
 
 Available options:
 
