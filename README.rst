@@ -22,6 +22,9 @@ no-title
 
   Line starting with ``$`` sign in not counted.
 
+no-raw
+  flag indicating that the raw text should not be rendered.
+
 
 Changes
 =======

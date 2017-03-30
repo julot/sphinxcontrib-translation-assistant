@@ -44,7 +44,10 @@ class Directive(BaseDirective):
     final_argument_whitespace = True
     has_content = False
 
-    option_spec = {'no-title': directives.flag}
+    option_spec = {
+        'no-title': directives.flag,
+        'no-raw': directives.flag,
+    }
 
     def run(self):
         env = self.state.document.settings.env
@@ -53,6 +56,7 @@ class Directive(BaseDirective):
         env.note_dependency(rel_path)
 
         no_title = 'no-title' in self.options
+        no_raw = 'no-raw' in self.options
 
         with open(path, encoding='utf-8') as f:
             text = f.read()
@@ -63,7 +67,10 @@ class Directive(BaseDirective):
 
         if not no_title:
             line = lines.popleft()
-            title = '{0} ー {1}'.format(line[0], line[1])
+            if no_raw:
+               title = line[1]
+            else:
+                title = '{0} ー {1}'.format(line[0], line[1])
             section = nodes.section(ids=title)
             section.append(nodes.title(text=title))
             lines.popleft()
@@ -71,8 +78,13 @@ class Directive(BaseDirective):
         contents = []
 
         for line in lines:
-            paragraph = nodes.paragraph(classes=['raw'], text=line[0] or '　')
-            contents.append(paragraph)
+            if not line[0].strip():
+                contents.append(nodes.paragraph('　'))
+                continue
+
+            if not no_raw:
+                paragraph = nodes.paragraph(classes=['raw'], text=line[0])
+                contents.append(paragraph)
 
             if line[1].strip():
                 paragraph = nodes.paragraph(
