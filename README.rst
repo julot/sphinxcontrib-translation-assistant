@@ -6,7 +6,23 @@ Sphinx extension to view
 `Translation Assistant <http://joeglens.com/translation-assistant-tool>`__
 file.
 
-Example:
+
+Installation
+============
+
+::
+
+  > pip install sphinxcontrib-translation-assistant
+
+Setup extension in ``conf.py`` file.
+
+::
+
+  extensions = ['sphinxcontrib.translation_assistant']
+
+
+Usage
+=====
 
 ::
 
