@@ -1,7 +1,9 @@
 from collections import deque
 from itertools import zip_longest
 from docutils import nodes
+from docutils.statemachine import ViewList
 from docutils.parsers.rst import directives
+
 from sphinx.util.compat import Directive as BaseDirective
 
 
@@ -79,7 +81,11 @@ class Directive(BaseDirective):
 
         for line in lines:
             if not line[0].strip():
-                contents.append(nodes.paragraph('　'))
+                contents.append(nodes.paragraph(classes=['blank'], text='　'))
+                continue
+
+            if line[0].strip()[:4] == '----':
+                contents.append(nodes.transition())
                 continue
 
             if not no_raw:

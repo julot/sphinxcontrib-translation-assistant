@@ -46,6 +46,12 @@ no-raw
 Changes
 =======
 
+0.1.1
+-----
+
+* Turn "----" into horizontal line.
+* Fix ignored blank line.
+
 
 0.1.0
 -----
