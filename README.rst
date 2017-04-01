@@ -49,7 +49,7 @@ Changes
 0.1.1
 -----
 
-* Turn "----" into horizontal line.
+* Turn 4 or more soft hyphen (minus) character into horizontal line.
 * Fix ignored blank line.
 
 
