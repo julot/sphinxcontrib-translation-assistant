@@ -1,7 +1,6 @@
 from collections import deque
 from itertools import zip_longest
 from docutils import nodes
-from docutils.statemachine import ViewList
 from docutils.parsers.rst import directives
 
 from sphinx.util.compat import Directive as BaseDirective
@@ -23,6 +22,12 @@ def split(text):
     translations = [line.rstrip() for line in texts[1].strip().splitlines()]
 
     return raws, translations
+
+
+def calc_progress(raws, translations):
+    raw_count = sum(1 for i in raws if i.strip())
+    translation_count = sum(1 for i in translations if i.strip())
+    return translation_count / raw_count
 
 
 def merge(raws, translations):
@@ -63,16 +68,26 @@ class Directive(BaseDirective):
         with open(path, encoding='utf-8') as f:
             text = f.read()
 
-        lines = parse(text=text)
+        if text[0].encode() != b'\xef\xbb\xbf':
+            raise ValueError('Not a valid Translation Assistant format.')
+
+        raws, translations = split(text=text)
+
+        lines = merge(raws=raws, translations=translations)
 
         section = None
 
         if not no_title:
+            progress = calc_progress(raws=raws, translations=translations)
             line = lines.popleft()
             if no_raw:
-               title = line[1]
+                title = '{0} [{1:.0%}]'.format(line[1], progress)
             else:
-                title = '{0} ー {1}'.format(line[0], line[1])
+                title = '{0} ー {1} [{2:.0%}]'.format(
+                    line[0],
+                    line[1],
+                    progress,
+                )
             section = nodes.section(ids=title)
             section.append(nodes.title(text=title))
             lines.popleft()
