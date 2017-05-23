@@ -7,6 +7,7 @@ from sphinx.util.compat import Directive as BaseDirective
 
 
 SEPARATOR = '---SEPERATOR---'
+HORIZONTAL_RULES = ('----', '====', '****')
 
 
 def parse(text):
@@ -99,7 +100,7 @@ class Directive(BaseDirective):
                 contents.append(nodes.paragraph(classes=['blank'], text='　'))
                 continue
 
-            if line[0].strip()[:4] == '----':
+            if line[0].strip()[:4] in HORIZONTAL_RULES:
                 contents.append(nodes.transition())
                 continue
 

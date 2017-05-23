@@ -46,6 +46,12 @@ no-raw
 Changes
 =======
 
+0.1.2
+-----
+
+* Add equal and asterisk sign as horizontal line.
+
+
 0.1.1
 -----
 
