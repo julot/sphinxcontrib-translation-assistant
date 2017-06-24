@@ -6,8 +6,8 @@ Sphinx extension to view
 `Translation Assistant <http://joeglens.com/translation-assistant-tool>`__
 file.
 
-To use this extension, it is recommended that you download the chapter then
-copy paste the content to Translation Assistant.
+To use this extension, it is recommended that you download the chapter in text
+format then copy paste the content to Translation Assistant.
 
 The link to text format download is available at the bottom of the page at each
 chapter.
