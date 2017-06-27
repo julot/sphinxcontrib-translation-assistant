@@ -14,7 +14,7 @@ chapter.
 
 .. important::
 
-  - Tab is not ASCII 9, but Unicode 3000 "Ideographic Space".
+  - Tab is not ASCII 9, but Unicode 3000 (Ideographic Space).
   - Separator is line with 44 asterisk character, rendered as horizontal line.
 
 
