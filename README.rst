@@ -6,16 +6,12 @@ Sphinx extension to view
 `Translation Assistant <http://joeglens.com/translation-assistant-tool>`__
 file.
 
-To use this extension, it is recommended that you download the chapter in text
-format then copy paste the content to Translation Assistant.
+To use this extension, you should download the chapter in text format then copy
+paste the content to Translation Assistant.
+This is because the extension search for tab to indicate content and title.
 
-The link to text format download is available at the bottom of the page at each
-chapter.
-
-.. important::
-
-  - Tab is not ASCII 9, but Unicode 3000 (Ideographic Space).
-  - Separator is line with 44 asterisk character, rendered as horizontal line.
+The link to download the text format is available at the bottom of the page at
+each chapter.
 
 
 Format
@@ -26,25 +22,29 @@ This extension is only for Syosetsu format.
 Since I didn't know the rule of Syosetsu format,
 this is the result of my investigation after seeing the text format download.
 
+Separator
+  Lines with 4 or more asterisk character.
+
+  This line separate content and note.
 
 Content
-  Lines starting with tab.
+  First line starts with ideographic space and the rest of the lines until
+  separator.
 
 Title
-  First line without tab.
-
-  The complicated part is that this line can be after of before separator.
-  But it seems that this line is always the line right before the line with
-  tab.
+  First line without ideographic space before the first line of content.
 
 Notes
-  Lines before or after separator depending on lines with tab.
+  Lines before or after separator depending on content.
+
+  Pre notes is lines before separator and content,
+  post notes is lines after content and separator.
 
 
-Without Author Notes
---------------------
+Without Author's Notes
+----------------------
 
-.. code-block:: none
+.. code-block:: text
 
   Title
 
@@ -55,12 +55,10 @@ Without Author Notes
     Content.
 
 
-With Author Notes
------------------
+With Author's Post-Notes
+------------------------
 
-After content.
-
-.. code-block:: none
+.. code-block:: text
 
   Title
 
@@ -74,9 +72,11 @@ After content.
 
   Notes.
 
-Before content.
 
-.. code-block:: none
+With Author's Pre-Notes
+-----------------------
+
+.. code-block:: text
 
   Notes.
 
@@ -90,9 +90,11 @@ Before content.
 
     Content.
 
-Before and after content.
 
-.. code-block:: none
+With Author's Note
+------------------
+
+.. code-block:: text
 
   Notes.
 
@@ -131,7 +133,7 @@ Usage
 
 .. code-block:: rst
 
-  .. translation-assistant:: /src/chapter-01.txt
+  .. translation-assistant:: chapter-01.txt
 
 
 Changes

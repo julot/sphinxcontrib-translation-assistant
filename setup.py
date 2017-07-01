@@ -20,7 +20,7 @@ keywords = [
 
 setup(
     name='sphinxcontrib-translation-assistant',
-    version='0.1.2',
+    version='0.2.0',
     url='https://github.com/julot/sphinxcontrib-translation-assistant',
     license='MIT',
     author='Andy Yulius',
@@ -44,4 +44,7 @@ setup(
     include_package_data=True,
     install_requires=requires,
     namespace_packages=['sphinxcontrib'],
+    tests_require=['pytest'],
+    setup_requires=['pytest-runner'],
+    test_suite="tests",
 )
