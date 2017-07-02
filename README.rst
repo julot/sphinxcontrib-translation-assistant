@@ -8,7 +8,8 @@ file.
 
 To use this extension, you should download the chapter in text format then copy
 paste the content to Translation Assistant.
-This is because the extension search for tab to indicate content and title.
+This is because the extension search for ideographic space to indicate content
+and title.
 
 The link to download the text format is available at the bottom of the page at
 each chapter.
