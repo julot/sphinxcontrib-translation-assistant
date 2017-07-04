@@ -2,6 +2,9 @@ import logging
 
 
 SEPARATOR = '****'
+CONTENT_STARTERS = ['\u3000', '\u300c']
+
+logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 
 def pluck_title(data):
@@ -25,8 +28,8 @@ def pluck_title(data):
         if not datum[0]:
             continue
 
-        # Stop if we encountered ideographic space.
-        if datum[0][0] == '\u3000':
+        # Stop if we encountered content starter.
+        if datum[0] and datum[0][0] in CONTENT_STARTERS:
             break
 
         # Get the datum that seems to be title.
@@ -54,9 +57,9 @@ def pluck_content(data):
     contents = []
     started = False
     for datum in data:
-        # Start searching for ideographic space.
+        # Start searching for content starter.
         if not started:
-            if datum[0] and datum[0][0] == '\u3000':
+            if datum[0] and datum[0][0] in CONTENT_STARTERS:
                 started = True
             else:
                 continue
@@ -89,8 +92,7 @@ def pluck_pre_note(data):
 
     """
 
-    logger = logging.getLogger('{0}.{1}'.format(__name__, 'pluck_pre_note'))
-    logger.debug('Init.')
+    logger = logging.getLogger(__name__)
 
     notes = []
     for datum in data:
@@ -98,14 +100,14 @@ def pluck_pre_note(data):
         # Though maybe we didn't collect any data at all.
         if datum[0].startswith(SEPARATOR):
             logger.debug(
-                'Separator found before ideographic space. Returning pre-note.'
+                'Separator found before content. Returning pre-note.'
             )
             return notes
 
         # Because pre notes is lines that must appears before separator,
-        # if we found ideographic space instead,
+        # if we found content starter instead,
         # we can safely assumed that the data didn't have pre notes.
-        if datum[0] and datum[0][0] == '\u3000':
+        if datum[0] and datum[0][0] in CONTENT_STARTERS:
             logger.debug(
                 'Ideographic space found before separator. '
                 'Returning empty list.'
@@ -144,13 +146,13 @@ def pluck_post_note(data):
     for datum in data:
         # Because post notes must be after content first then separator second.
 
-        # Search for ideographic space first.
+        # Search for content starter first.
         if not tab_found:
-            if datum[0] and datum[0][0] == '\u3000':
+            if datum[0] and datum[0][0] in CONTENT_STARTERS:
                 tab_found = True
             continue
 
-        # Search for separator after ideographic space is found.
+        # Search for separator after content is found.
         if not separator_found:
             if datum[0].startswith(SEPARATOR):
                 separator_found = True

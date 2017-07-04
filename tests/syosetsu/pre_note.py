@@ -7,7 +7,12 @@ from . import fixtures
 
 
 def test():
-    logging.basicConfig(level=logging.DEBUG)
+    print('Test Pre Note')
+    logger = logging.getLogger(
+        'sphinxcontrib.translation_assistant.formats.syosetsu'
+    )
+    logger.addHandler(logging.StreamHandler())
+    logger.setLevel(logging.DEBUG)
 
     raw = '\r\n'.join(fixtures.JAPANESE_BODIES)
     translation = '\r\n'.join(fixtures.ENGLISH_BODIES)

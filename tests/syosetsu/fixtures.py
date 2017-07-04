@@ -5,6 +5,7 @@ JAPANESE = {
         '%　わたしは本が好きだ。',
         '$大好きだ。',
         '%　三度のご飯より愛してる。',
+        '%「うっ……」',
     ],
     'notes': {
         'pre': [
@@ -25,6 +26,7 @@ ENGLISH = {
         '　I like book.',
         'Really really like.',
         '　I love it more than three times meals.',
+        '「Uu……」'
     ],
     'notes': {
         'pre': [
