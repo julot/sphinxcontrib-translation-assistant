@@ -24,7 +24,7 @@ setup(
     url='https://github.com/julot/sphinxcontrib-translation-assistant',
     license='MIT',
     author='Andy Yulius',
-    author_email='julot@gmail.com',
+    author_email='andy.julot@gmail.com',
     description=description,
     long_description=long_description,
     keywords=' '.join(keywords),
@@ -46,5 +46,5 @@ setup(
     namespace_packages=['sphinxcontrib'],
     tests_require=['pytest'],
     setup_requires=['pytest-runner'],
-    test_suite="tests",
+    test_suite='tests',
 )
