@@ -61,7 +61,7 @@ def test():
     # Pre note only
     raw = '\r\n'.join(
         JAPANESE['notes']['pre']
-        + ['%{}'.format(syosetsu.SEPARATOR)]
+        + ['%{}'.format(syosetsu.SEPARATORS[0])]
         + JAPANESE_BODIES
     )
     translation = '\r\n'.join(
@@ -75,9 +75,9 @@ def test():
     # With post note and pre note
     raw = '\r\n'.join(
         JAPANESE['notes']['pre']
-        + ['%{}'.format(syosetsu.SEPARATOR)]
+        + ['%{}'.format(syosetsu.SEPARATORS[0])]
         + JAPANESE_BODIES
-        + ['%{}'.format(syosetsu.SEPARATOR)]
+        + ['%{}'.format(syosetsu.SEPARATORS[0])]
         + JAPANESE['notes']['post']
     )
     translation = '\r\n'.join(
@@ -93,7 +93,7 @@ def test():
     # Post note without pre note
     raw = '\r\n'.join(
         JAPANESE_BODIES
-        + ['%{}'.format(syosetsu.SEPARATOR)]
+        + ['%{}'.format(syosetsu.SEPARATORS[0])]
         + JAPANESE['notes']['post']
     )
     translation = '\r\n'.join(

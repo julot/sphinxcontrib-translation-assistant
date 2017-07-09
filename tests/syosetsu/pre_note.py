@@ -23,7 +23,7 @@ def test():
 
     raw = '\r\n'.join(
         fixtures.JAPANESE['notes']['pre']
-        + ['%{}'.format(syosetsu.SEPARATOR)]
+        + ['%{}'.format(syosetsu.SEPARATORS[0])]
         + fixtures.JAPANESE_BODIES
     )
     translation = '\r\n'.join(

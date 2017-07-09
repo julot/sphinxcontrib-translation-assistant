@@ -20,7 +20,7 @@ keywords = [
 
 setup(
     name='sphinxcontrib-translation-assistant',
-    version='0.2.0',
+    version='0.2.1',
     url='https://github.com/julot/sphinxcontrib-translation-assistant',
     license='MIT',
     author='Andy Yulius',

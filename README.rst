@@ -140,6 +140,12 @@ Usage
 Changes
 =======
 
+1.2.1
+-----
+
+* Add full width asterisk character as separator.
+
+
 0.2.0
 -----
 

@@ -1,7 +1,7 @@
 import logging
 
 
-SEPARATOR = '****'
+SEPARATORS = ('****', '\uff0a\uff0a\uff0a\uff0a')
 CONTENT_STARTERS = ['\u3000', '\u300c']
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
@@ -67,7 +67,7 @@ def pluck_content(data):
         # Start collecting content after ideographic space is found.
 
         # Stop if separator is found.
-        if datum[0].startswith(SEPARATOR):
+        if datum[0] and datum[0][0:4] in SEPARATORS:
             break
 
         # Collect content
@@ -98,7 +98,7 @@ def pluck_pre_note(data):
     for datum in data:
         # If we found separator, send previously collected data.
         # Though maybe we didn't collect any data at all.
-        if datum[0].startswith(SEPARATOR):
+        if datum[0] and datum[0][0:4] in SEPARATORS:
             logger.debug(
                 'Separator found before content. Returning pre-note.'
             )
@@ -154,7 +154,7 @@ def pluck_post_note(data):
 
         # Search for separator after content is found.
         if not separator_found:
-            if datum[0].startswith(SEPARATOR):
+            if datum[0] and datum[0][0:4] in SEPARATORS:
                 separator_found = True
             continue
 
